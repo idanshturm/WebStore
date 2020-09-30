@@ -1,0 +1,79 @@
+{% extends "layout.jinja2" %}
+
+{% block pagestyles %}
+  <link href="{{ url_for('static', filename='dist/css/account.css') }}" rel="stylesheet" type="text/css">
+{% endblock %}
+
+{% block content %}
+  <div class="form-wrapper">
+
+    <div class="logo">
+      <img src="{{ url_for('static', filename='dist/img/logo.png') }}" alt="logo"/>
+    </div>
+
+    {% for message in get_flashed_messages() %}
+      <div class="alert alert-warning">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        {{ message }}
+      </div>
+    {% endfor %}
+
+    <h1>Insert Your Product</h1>
+
+    <form method="POST" action="/insert">
+      {{ form.csrf_token }}
+
+      
+      
+      <fieldset class="name">
+        {{ form.name.label }}
+        {{ form.name }}
+        {% if form.name.errors %}
+          <ul class="errors">
+            {% for error in form.name.errors %}
+              <li>{{ error }}</li>{% endfor %}
+          </ul>
+        {% endif %}
+      </fieldset>
+
+   
+
+
+     <fieldset class="price">
+        {{ form.price.label }}
+        {{ form.price }}
+        {% if form.price.errors %}
+          <ul class="errors">
+            {% for error in form.price.errors %}
+              <li>{{ error }}</li>{% endfor %}
+          </ul>
+        {% endif %}
+      </fieldset>
+
+
+
+
+
+       <fieldset class="amount">
+        {{ form.amount.label }}
+        {{ form.amount }}
+        {% if form.amount.errors %}
+          <ul class="errors">
+            {% for error in form.amount.errors %}
+              <li>{{ error }}</li>{% endfor %}
+          </ul>
+        {% endif %}
+      </fieldset>
+
+
+
+
+      <div class="submit-button">
+        {{ form.submit}}
+      </div>
+
+      
+
+    </form>
+  </div>
+{% endblock %}
